@@ -64,7 +64,7 @@ rem http://stackoverflow.com/a/735603/2334951
 ping -n 3 127.0.0.1 > nul
 
 cd /D "%my_dir%"
-hub4com --baud=%baud% --no-default-fc-route=All:All --bi-route=All:All --trace-file=%log_path% --octs=off --create-filter=trace --add-filters=0:trace  \\.\CNCB0 %pcom%
+hub4com --baud=%baud% --no-default-fc-route=All:All --bi-route=All:All --trace-file=%log_path% --octs=off --create-filter=trace --add-filters=0:trace  \\.\CNCB%n% %pcom%
 goto eof
 
 :usage
