@@ -5,6 +5,8 @@ set pcom=%2
 set vcom=%3
 set baud=%4
 
+if "%baud%" == "" (set baud=38400)
+
 set log_head=trace_%pcom%
 
 call :strlen log_head_len log_head
@@ -14,7 +16,7 @@ set my_drive=%cd:~0,3%
 
 set arg_n=0
 for %%x in (%*) do set /A arg_n+=1
-if not %arg_n% == 4 (goto usage)
+if not %arg_n% GEQ 3 (goto usage)
 
 set n_ok=0
 for /l %%X in (0,1,99) do (
@@ -66,7 +68,7 @@ hub4com --baud=%baud% --no-default-fc-route=All:All --bi-route=All:All --trace-f
 goto eof
 
 :usage
-echo Usage: sicomtrace.bat ^<n^> ^<pysical_com^> ^<virtual_com^> ^<baud^>
+echo Usage: sicomtrace.bat ^<n^> ^<pysical_com^> ^<virtual_com^> [baud]
 goto eof
 
 rem http://stackoverflow.com/a/5841587/2334951
