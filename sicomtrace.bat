@@ -11,6 +11,7 @@ set log_head=trace_%pcom%
 
 call :strlen log_head_len log_head
 
+set prog_dir=%~dp0
 set my_dir=%cd%
 set my_drive=%cd:~0,3%
 
@@ -35,13 +36,17 @@ if %baud_ok% == 0 (goto usage)
 
 set /a log_n_starts_at = %log_head_len%+1
 set last_log_n=0
-rem setlocal enabledelayedexpansion
-for %%i in (%log_head%.*.log) do (
+set log_n=0
+setlocal enabledelayedexpansion
+for %%i in (%log_head%.???.log) do (
   set "trace_file=%%i"
   set "log_n=!trace_file:~%log_n_starts_at%,-4!"
-  for /f "tokens=* delims=0" %%a in ("!log_n!") do (
-    set log_n=%%a)
-  if !log_n! GTR !last_log_n! (set "last_log_n=!log_n!")
+  rem http://stackoverflow.com/a/17584764/2334951
+  set "not_numeric="&for /f "delims=0123456789" %%i in ("!log_n!") do set "not_numeric=%%i"
+  if not defined not_numeric (
+    for /f "tokens=* delims=0" %%a in ("!log_n!") do (set log_n=%%a)
+    if !log_n! GTR !last_log_n! (set "last_log_n=!log_n!")
+    )
   )
 )
 
@@ -50,12 +55,12 @@ set "fntemp=000%log_n%"
 set fn=!fntemp:~-3!
 set log_name=%log_head%.%fn%.log
 set log_path="%my_dir%\%log_name%"
-rem endlocal
 
-cd /D "C:\Program Files (x86)\com0com"
+pushd %prog_dir%
 setupc.exe remove %n%
 setupc.exe install %n% PortName=%vcom% *
 setupc.exe list
+popd
 
 echo Traffic will be logged in %log_path%
 
@@ -63,8 +68,10 @@ rem wait 2 seconds
 rem http://stackoverflow.com/a/735603/2334951
 ping -n 3 127.0.0.1 > nul
 
-cd /D "%my_dir%"
-hub4com --baud=%baud% --no-default-fc-route=All:All --bi-route=All:All --trace-file=%log_path% --octs=off --create-filter=trace --add-filters=0:trace  \\.\CNCB%n% %pcom%
+pushd %prog_dir%
+call hub4com --baud=%baud% --no-default-fc-route=All:All --bi-route=All:All --trace-file=%log_path% --octs=off --create-filter=trace --add-filters=0:trace  \\.\CNCB%n% %pcom%
+popd
+endlocal
 goto eof
 
 :usage
