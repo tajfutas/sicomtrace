@@ -33,11 +33,13 @@ Installation
 
 7. Assuming the physical port of the Master station is COM4, type
    `sicomtrace 0 com4 com14` to the Command Prompt. The script will redirect all
-   traffic to a virtual COM port on COM14. It will also log the data in a file.
+   traffic to a virtual COM port on COM14.
+   It will also log the data in a file.
+   Softwares like SportIdent ConfigPlus should connect to the virtual COM port.
 
 8. Repeat steps 5-7 for additional Master Stations with increasing identifier
    (first argument), eg. the next command could be like
-   `sicomtrace 1 com3 com13`.
+   `sicomtrace 1 comP comV`.
 
 
 [1]: https://code.google.com/archive/p/powersdr-iq/downloads
