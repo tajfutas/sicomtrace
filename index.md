@@ -4,7 +4,7 @@ title: SICOMTRACE
 subtitle: SportIdent COM port követő és TCP/IP szerver
 ---
 
-verziószám: 0.2.0
+verziószám: 0.2.0  
 _[LETÖLTÉS]_
 
 
@@ -39,7 +39,7 @@ Telepítés és használat
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
-3. [Töltse le][_LETÖLTÉS_] és csomagolja ki a SICOMTRACE-et egy könyvtárba!
+3. [Töltse le][LETÖLTÉS] és csomagolja ki a SICOMTRACE-et egy könyvtárba!
 
 4. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re)!
 
