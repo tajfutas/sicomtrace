@@ -1,7 +1,7 @@
 ---
 layout: page
 title: SICOMTRACE
-subtitle: SportIdent COM port nyomozó és TCP szerver
+subtitle: SportIdent COM port követő és TCP/IP szerver
 ---
 
 verziószám: 0.2.0
