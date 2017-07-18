@@ -5,6 +5,7 @@ subtitle: SportIdent COM port követő és TCP/IP szerver
 ---
 
 verziószám: 0.2.0
+_[LETÖLTÉS]_
 
 
 Bevezetés
@@ -31,22 +32,22 @@ _Megjegyzés:_ A következő verzió nagyob szabadságot fog biztosítani a port
 Telepítés és használat
 ----------------------
 
-1. Töltse le és telepítse a [com0com virtuális null modem aláírt meghajtóját](https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed) telepítése.
+1. Töltse le és telepítse a [com0com virtuális null modem aláírt meghajtóját][com0com driver]!
 
-2. Indítsa a com0com setup programot és biztosítson egy virtuális COM port párt a SportIdent eszköz számára.
+2. Indítsa a com0com setup programot és biztosítson egy virtuális COM port párt a SportIdent eszköz számára!
    A két port valamelyikének állítsa be a _use Port class_ kapcsolót: ezzel a neve és a működése is olyan lesz, mint egy valódi COM portnak.
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
-3. ![Töltse le](https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip) és csomagolja ki a SICOMTRACE-et egy könyvtárba.
+3. [Töltse le][_LETÖLTÉS_] és csomagolja ki a SICOMTRACE-et egy könyvtárba!
 
-4. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re).
+4. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re)!
 
-   Lépjen be a könyvtárba ahol a naplófájlok lesznek.
+   Lépjen be a könyvtárba ahol a naplófájlok lesznek!
    Azt javaslom, hogy ha lehetséges, akkor egy gyors meghajtót válasszon erre a célra, mint például egy SSD tároló vagy egy USB 3.0 pendrive.
-   Ellenkező esetben működtesse az eszközt 4800-as baudrátán, ami egyébként még mindig kellően gyors adatátvitelt biztosít a legtöbb tájékozódási fútóverseny esetében.
+   Ellenkező esetben működtesse az eszközt 4800-as baudrátán, ami egyébként még mindig kellően gyors adatátvitelt biztosít a legtöbb tájékozódási fútóverseny esetében!
 
-5. Indítsa a `SICOMTRACE.BAT`-ot.
+5. Indítsa a `SICOMTRACE.BAT`-ot!
    Első argumentumként a SportIdent eszköz COM portját, másodikként a _nem Port class_ virtuális port nevét, harmadik argumentumként pedig a baudrátát kell megadni, ami 38400 vagy 4800 lehet és meg kell feleljen a SportIdent eszköz beállított értékének.
    Lehetséges a TCP szerver portjának megadása is negyedik argumentumként.
    Ennek hiányában a TCP szerver a 7487-es porton fog indulni.
@@ -63,7 +64,7 @@ Telepítés és használat
    ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
 
    Ha a SportIdent hardver és a megadott baudráták nem egyeznek meg akkor ezen a ponton _Communication Failed_ hibaüzenetet kell kapjon.
-   Ennek orvoslására állítsa meg a SICOMTRACE-et kétszeri Ctrl+C leütésével, nyomja meg a felfelé mutató nyíl billentyűt (ez előkészíti az előző parancs szövegét a kurzor elé), írja át a baudrátát, majd üssön Entert.
+   Ennek orvoslására állítsa meg a SICOMTRACE-et kétszeri Ctrl+C leütésével, nyomja meg a felfelé mutató nyíl billentyűt (ez előkészíti az előző parancs szövegét a kurzor elé), írja át a baudrátát, majd üssön Entert!
    Ezt akkor is meg kell tenni, ha változik az eszköz baudrátája menet közben, ami mellesleg ritka dolog.
    Mindenesetre a leghelyesebb a SportIdent eszköz baudrátáját már korábban beálítani, a `SICOMTRACE.BAT`-nak azt az értéket megadni, és azt utána nem megváltoztatni.
 
@@ -82,9 +83,9 @@ Telepítés és használat
    Ehelyett a mutatott érték újra és újra visszaugrik 38400-ra, hiába állítjuk át azt az F3 billentyű leütésével.
    Ennek ellenére én nem tapasztaltam ebből semmilyen problémát:  a szoftver hibátlanul kommunikált a 4800-as baudrátára állított mesterdobozzal.
 
-   Amennyiben követi a bemutatót, akkor most klikkeljen a _View punch_ ikonra Config+-ban.
+   Amennyiben követi a bemutatót, akkor most klikkeljen a _View punch_ ikonra Config+-ban!
 
-7. Itt az idő, hogy ha szeretne, csatlakozzon a TCP/IP szerverhez.
+7. Most csatlakozhat a TCP/IP szerverhez.
    Én ezt a telepítést nem igénylő [Hercules SETUP utility](http://www.hw-group.com/products/hercules/index_en.html) programmal fogom bemutatni.
    Ha letöltötte és elindította, lépjen a _TCP Client_ fülre és kapcsolódjon a _Connect_ nyomógomb segítségével.
 
@@ -123,3 +124,7 @@ _Copyright © 2016–2017, Szieberth Ádám_
 Minden engedély megadva.
 
 Ez a munka szabadon felhasználható mindennemű célból nem kizárólagosan ideértve a használatot, másolást, módosítást, közlést, terjesztést, újraengedélyezést, és az eredeti vagy a derivatív példányok üzleti célú értékesítését.
+
+
+[LETÖLTÉS]: https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip
+[com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
