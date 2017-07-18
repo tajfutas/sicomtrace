@@ -5,6 +5,7 @@ subtitle: SportIdent COM Port Tracer and TCP server
 ---
 
 version 0.2.0
+_[DOWNLOAD]_
 
 
 Introduction
@@ -32,20 +33,22 @@ _Sidenote:_ The next version will provide more flexibility in adding virtual COM
 Installation and Usage
 ----------------------
 
-1. Download and install the [signed version of the com0com virtual null modem driver](https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed).
+1. Download and install the [signed version of the com0com virtual null modem driver][com0com driver].
 
 2. Start the com0com setup program and ensure a virtual COM port pair for the SportIdent hardware.
    Set any of the two ports to _use Port class_: this should change its name an behavior to mimic a real COM port.
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
-3. Open a Command Prompt (Start button > Search for `cmd`).
+3. [Download][DOWNLOAD] and unpack SICOMTRACE to a directory you prefer.
+
+4. Open a Command Prompt (Start button > Search for `cmd`).
 
    Go to the directory where you want to store the log files.
    I advice you to choose a fast storage for this, like an SSD drive or an USB 3.0 pendrive.
    Otherwise, set the communication to 4800 baudrate which should be still fast enough for the majority of orienteering events.
 
-4. Start the `SICOMTRACE.BAT`.
+5. Start the `SICOMTRACE.BAT`.
    Pass the SportIdent hardware COM port as the first, the _non-Port class_ virtual port as the second, and the baudrate as the third argument.
    Baudrate can be 38400 or 4800 and must match with the SportIdent hardware's own setting.
    The TCP server port can be explicitly set with the optional fourt argument.
@@ -57,12 +60,12 @@ Installation and Usage
 
    ![Allow access for hub4com](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
-5. Now you can connect to your SI station via the _Port class_ virtual COM port.
+6. Now you can connect to your SI station via the _Port class_ virtual COM port.
    Only the port changes but communication should work like it used to.
 
    ![Config+ connected to virtual COM port](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
 
-   If the Sportident hardware have different baudrate setting than the given argument then here you should get a Communication Failed alert.
+   If the SportIdent hardware have different baudrate setting than the given argument then here you should get a Communication Failed alert.
    To solve it, stop SICOMTRACE by hitting Ctrl+C twice, press the upward arrow key to get the last command before the cursor, edit the baudrate, and press the Enter key.
    This should be also done if the physical device's baudrate changes during the SICOMTRACE session which is a rare event.
    By all means the best practice is to set the SportIdent hardware baudrate previously, pass that value to `SICOMTRACE.BAT` and avoid changing that thereafter.
@@ -84,7 +87,7 @@ Installation and Usage
 
    If you follow the demonstration then click on _View punch_ in Config+ now.
 
-6. It is time to connect to the TCP server if wanted.
+7. It is time to connect to the TCP server if wanted.
    I demonstrate this with the standalone [Hercules SETUP utility](http://www.hw-group.com/products/hercules/index_en.html).
    Once downloaded and started, then go to the TCP Client tab and connect.
 
@@ -105,7 +108,7 @@ Installation and Usage
 
    ![Finish punch details in Config+](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cplpunch.png)
 
-7. Now we can query the SI station time via TCP with Hercules.
+8. Now we can query the SI station time via TCP with Hercules.
    Copypaste _02 F7 00 F7 00 03_ to the first send entry, set _HEX_ and click on the _Send_ button.
 
    ![Get time command with Hercules](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/herctime.png)
@@ -123,3 +126,7 @@ _Copyright © 2016–2017, Szieberth Ádám_
 All permissions are granted.
 
 This work is free for any kind of usage, including but not limited to copy, modify, publish, distribute, sublicense, and to sell original or derivative copies of it.
+
+
+[DOWNLOAD]: https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip
+[com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
