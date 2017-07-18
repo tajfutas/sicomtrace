@@ -38,13 +38,15 @@ Telepítés és használat
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
-3. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re).
+3. ![Töltse le](https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip) és csomagolja ki a SICOMTRACE-et egy könyvtárba.
+
+4. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re).
 
    Lépjen be a könyvtárba ahol a naplófájlok lesznek.
    Azt javaslom, hogy ha lehetséges, akkor egy gyors meghajtót válasszon erre a célra, mint például egy SSD tároló vagy egy USB 3.0 pendrive.
    Ellenkező esetben működtesse az eszközt 4800-as baudrátán, ami egyébként még mindig kellően gyors adatátvitelt biztosít a legtöbb tájékozódási fútóverseny esetében.
 
-4. Indítsa a `SICOMTRACE.BAT`-ot.
+5. Indítsa a `SICOMTRACE.BAT`-ot.
    Első argumentumként a SportIdent eszköz COM portját, másodikként a _nem Port class_ virtuális port nevét, harmadik argumentumként pedig a baudrátát kell megadni, ami 38400 vagy 4800 lehet és meg kell feleljen a SportIdent eszköz beállított értékének.
    Lehetséges a TCP szerver portjának megadása is negyedik argumentumként.
    Ennek hiányában a TCP szerver a 7487-es porton fog indulni.
@@ -55,7 +57,7 @@ Telepítés és használat
 
    ![hub4com porthozzáférésének engedélyezése](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
-5. Most csatlakozhat a SportIdent eszközhöz a _Port class_ virtuális COM porton keresztül.
+6. Most csatlakozhat a SportIdent eszközhöz a _Port class_ virtuális COM porton keresztül.
    A kommunikáció úgy folytatható mint annak előtte, csupán a COM port változott.
 
    ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
@@ -82,7 +84,7 @@ Telepítés és használat
 
    Amennyiben követi a bemutatót, akkor most klikkeljen a _View punch_ ikonra Config+-ban.
 
-6. Itt az idő, hogy ha szeretne, csatlakozzon a TCP/IP szerverhez.
+7. Itt az idő, hogy ha szeretne, csatlakozzon a TCP/IP szerverhez.
    Én ezt a telepítést nem igénylő [Hercules SETUP utility](http://www.hw-group.com/products/hercules/index_en.html) programmal fogom bemutatni.
    Ha letöltötte és elindította, lépjen a _TCP Client_ fülre és kapcsolódjon a _Connect_ nyomógomb segítségével.
 
@@ -103,7 +105,7 @@ Telepítés és használat
 
    ![Finish punch details in Config+](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cplpunch.png)
 
-7. Most lekérdezhetjük az SI doboz idejét TCP/IP-n keresztül Herculessel.
+8. Most lekérdezhetjük az SI doboz idejét TCP/IP-n keresztül Herculessel.
    Másolja a _02 F7 00 F7 00 03_ szöveget az első _Send_ beviteli mezőbe, pipálja ki a _HEX_-et és klikkeljen a _Send_ nyomógombra!
 
    ![Get time command with Hercules](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/herctime.png)
