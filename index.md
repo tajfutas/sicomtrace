@@ -1,7 +1,8 @@
-<a href="https://github.com/tajfutas/sicomtrace/blob/master/readme.md"><img alt="English documentation" src="https://raw.githubusercontent.com/tajfutas/sicomtrace/master/icons/flag_usa.png"/></a>
-
-SICOMTRACE (SportIdent COM port nyomozó és TCP szerver)
-=======================================================
+---
+layout: page
+title: SICOMTRACE
+subtitle: SportIdent COM port nyomozó és TCP szerver
+---
 
 verziószám: 0.2.0
 
@@ -35,7 +36,7 @@ Telepítés és használat
 2. Indítsa a com0com setup programot és biztosítson egy virtuális COM port párt a SportIdent eszköz számára.
    A két port valamelyikének állítsa be a _use Port class_ kapcsolót: ezzel a neve és a működése is olyan lesz, mint egy valódi COM portnak.
 
-   ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/setup.png)
+   ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
 3. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re).
 
@@ -48,27 +49,27 @@ Telepítés és használat
    Lehetséges a TCP szerver portjának megadása is negyedik argumentumként.
    Ennek hiányában a TCP szerver a 7487-es porton fog indulni.
 
-   ![SICOMTRACE a Parancssorban](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/cmd.png)
+   ![SICOMTRACE a Parancssorban](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd.png)
 
    Előfordulhat, hogy engedélyezni kell a hub4com porthozzáférését.
 
-   ![hub4com porthozzáférésének engedélyezése](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/alert.png)
+   ![hub4com porthozzáférésének engedélyezése](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
 5. Most csatlakozhat a SportIdent eszközhöz a _Port class_ virtuális COM porton keresztül.
    A kommunikáció úgy folytatható mint annak előtte, csupán a COM port változott.
 
-   ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/cpl2virt.png)
+   ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
 
    Ha a SportIdent hardver és a megadott baudráták nem egyeznek meg akkor ezen a ponton _Communication Failed_ hibaüzenetet kell kapjon.
    Ennek orvoslására állítsa meg a SICOMTRACE-et kétszeri Ctrl+C leütésével, nyomja meg a felfelé mutató nyíl billentyűt (ez előkészíti az előző parancs szövegét a kurzor elé), írja át a baudrátát, majd üssön Entert.
    Ezt akkor is meg kell tenni, ha változik az eszköz baudrátája menet közben, ami mellesleg ritka dolog.
    Mindenesetre a leghelyesebb a SportIdent eszköz baudrátáját már korábban beálítani, a `SICOMTRACE.BAT`-nak azt az értéket megadni, és azt utána nem megváltoztatni.
 
-   ![Communication Failed hibaüzenet](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/commfail.png)
+   ![Communication Failed hibaüzenet](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/commfail.png)
 
    Ha a kapcsolat sikeres, akkor minden kommunikáció naplózásra kerül a háttérben.
 
-   ![RS232 napló](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/tracelog.png)
+   ![RS232 napló](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/tracelog.png)
 
    Látható, hogy a SportIdent Config+ 38400-as baudrátát mutat 4800 helyett.
    Ennek oka az, hogy a virtuális port hiba nélkül elfogadja a 38400-as baudrátával érkező adatokat annak ellenére, hogy 4800-ra van állítva.
@@ -88,11 +89,11 @@ Telepítés és használat
    Jobb klikk a _Received/Sent data_ területre és állítsa be a _HEX Enable_ opciót, hogy az adatokat hexadecimális formában láttassa a program.
    Ha most végzünk egy lyukasztást, akkor annak nyers RS232 adatai azonnal meg kell jelenjenek itt...
 
-   ![Céllyukasztás bájtjai a kapcsolódott TCP kliensnél](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/hercconn.png)
+   ![Céllyukasztás bájtjai a kapcsolódott TCP kliensnél](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/hercconn.png)
 
    ... és a naplófájlban is.
 
-   ![Céllyukasztás bájtjai a naplófájlban](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/punchlog.png)
+   ![Céllyukasztás bájtjai a naplófájlban](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/punchlog.png)
 
    Látható, hogy ez a naplófájl nem azonos a korábban mutatottal.
    Ennek az oka az, hogy a bemutató készítése közben többször is újraindítottam a SICOMTRACE-et és az mindannyiszor egy új naplófájlba kezdett dolgozni.
@@ -100,12 +101,12 @@ Telepítés és használat
 
    A lyukasztás adatai a Config+-ban a szokott módon kell megjelenjenek.
 
-   ![Finish punch details in Config+](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/cplpunch.png)
+   ![Finish punch details in Config+](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cplpunch.png)
 
 7. Most lekérdezhetjük az SI doboz idejét TCP/IP-n keresztül Herculessel.
    Másolja a _02 F7 00 F7 00 03_ szöveget az első _Send_ beviteli mezőbe, pipálja ki a _HEX_-et és klikkeljen a _Send_ nyomógombra!
 
-   ![Get time command with Hercules](https://raw.githubusercontent.com/tajfutas/sicomtrace/master/screenshots/herctime.png)
+   ![Get time command with Hercules](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/herctime.png)
 
    Látható, hogy a BSM7 válasza _02 F7 09 00 0C 11 07 0C 07 6A 88 23 40 E6 03_.
 
