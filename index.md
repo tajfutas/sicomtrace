@@ -2,10 +2,10 @@
 layout: page
 title: SICOMTRACE
 subtitle: SportIdent COM port követő és TCP/IP szerver
+version: 0.2.0
+repo: "https://github.com/tajfutas/sicomtrace"
+download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip"
 ---
-
-verziószám: 0.2.0  
-_[LETÖLTÉS]_
 
 
 Bevezetés
@@ -126,5 +126,5 @@ Minden engedély megadva.
 Ez a munka szabadon felhasználható mindennemű célból nem kizárólagosan ideértve a használatot, másolást, módosítást, közlést, terjesztést, újraengedélyezést, és az eredeti vagy a derivatív példányok üzleti célú értékesítését.
 
 
-[LETÖLTÉS]: https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip
+[LETÖLTÉS]: {{ page.download }}
 [com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
