@@ -2,10 +2,10 @@
 layout: page
 title: SICOMTRACE
 subtitle: SportIdent COM Port Tracer and TCP server
+version: 0.2.0
+repo: "https://github.com/tajfutas/sicomtrace"
+download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip"
 ---
-
-version 0.2.0  
-_[DOWNLOAD]_
 
 
 Introduction
@@ -128,5 +128,5 @@ All permissions are granted.
 This work is free for any kind of usage, including but not limited to copy, modify, publish, distribute, sublicense, and to sell original or derivative copies of it.
 
 
-[DOWNLOAD]: https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip
+[DOWNLOAD]: {{ page.download }}
 [com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
