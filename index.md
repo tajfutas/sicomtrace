@@ -4,7 +4,7 @@ title: SICOMTRACE
 subtitle: SportIdent COM Port Tracer and TCP server
 ---
 
-version 0.2.0
+version 0.2.0  
 _[DOWNLOAD]_
 
 
