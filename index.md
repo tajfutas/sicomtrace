@@ -2,9 +2,9 @@
 layout: page
 title: SICOMTRACE
 subtitle: SportIdent COM Port Tracer and TCP server
-version: 0.2.0
+version: 0.2.1
 repo: "https://github.com/tajfutas/sicomtrace"
-download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip"
+download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.1/sicomtrace.zip"
 ---
 
 
@@ -49,10 +49,10 @@ Installation and Usage
    Otherwise, set the communication to 4800 baudrate which should be still fast enough for the majority of orienteering events.
 
 5. Start the `SICOMTRACE.BAT`.
-   Pass the SportIdent hardware COM port as the first, the _non-Port class_ virtual port as the second, and the baudrate as the third argument.
+   Pass the SportIdent hardware COM port as the first, baudrate as the second, and the virtual com port pair name (eg. `CNCB0`) as the third argument.
    Baudrate can be 38400 or 4800 and must match with the SportIdent hardware's own setting.
    The TCP server port can be explicitly set with the optional fourt argument.
-   Without it, TCP server serves on port 7487.
+   Without it, no TCP/IP server will be started.
 
    ![Command Prompt session for SICOMTRACE](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd.png)
 
