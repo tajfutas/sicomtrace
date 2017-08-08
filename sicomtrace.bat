@@ -1,5 +1,5 @@
 @echo off
-echo SICOMTRACE v0.2.0 by Szieberth Adam
+echo SICOMTRACE v0.2.1 by Szieberth Adam
 
 setlocal
 
@@ -15,8 +15,7 @@ set exitcode=1
 
 :usage
 
-echo Usage: SICOMTRACE.BAT ^<SI_STATION_COM^> ^<VIRTUAL_COM^> ^<BAUD^> [TCP_PORT]
-echo Default TCP port is 7487.
+echo Usage: SICOMTRACE.BAT ^<SI_STATION_COM^> ^<BAUD^> ^<VIRTUAL_COM_PAIR^> [TCP_PORT]
 goto end
 
 
@@ -24,8 +23,8 @@ goto end
 
 set exitcode=0
 set sistationcom=%1
-set virtualcom=%2
-set baud=%3
+set baud=%2
+set virtcompair=%3
 set port=%4
 
 rem handle Baudrate argument
@@ -37,7 +36,7 @@ goto end
 :baud_ok
 
 rem handle TCP server port argument
-if "%port%" == "" (set port=7487)
+if "%port%" == "" (goto port_ok)
 if %port% gtr 0 if %port% leq 65535 (goto port_ok)
 echo Invalid Port!  Please set it between 0 and 65535!
 set exitcode=3
@@ -60,18 +59,30 @@ Attention! Communication is impossible without the "--octs=off" option!
 
 :hub4comcall
 
-call %prog_dir%\hub4com.exe ^
+set callstr=^
+%prog_dir%\hub4com.exe ^
 --baud=%baud% ^
---octs=off \\.\^
-%sistationcom% ^
-\\.\^
-%virtualcom% ^
---use-driver=tcp ^
-%port% ^
---route=0:All --route=1:0 --route=2:0 ^
+--octs=off ^
 --no-default-fc-route=All:All ^
 --trace-file=%logname% ^
---create-filter=trace --add-filters=0:trace
+--create-filter=trace --add-filters=0:trace ^
+\\.\%sistationcom% ^
+--route=0:All ^
+\\.\%virtcompair% ^
+--route=1:0
+
+if "%port%" neq "" (
+  set callstr=%callstr% ^
+--use-driver=tcp ^
+%port% ^
+--route=2:0
+)
+
+echo.
+echo HUB4COM CALL STRING:
+echo %callstr%
+echo.
+call %callstr%
 goto end
 
 
