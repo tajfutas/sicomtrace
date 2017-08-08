@@ -2,9 +2,9 @@
 layout: page
 title: SICOMTRACE
 subtitle: SportIdent COM port követő és TCP/IP szerver
-version: 0.2.0
+version: 0.2.1
 repo: "https://github.com/tajfutas/sicomtrace"
-download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.0/sicomtrace.zip"
+download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.1/sicomtrace.zip"
 ---
 
 
@@ -48,9 +48,10 @@ Telepítés és használat
    Ellenkező esetben működtesse az eszközt 4800-as baudrátán, ami egyébként még mindig kellően gyors adatátvitelt biztosít a legtöbb tájékozódási fútóverseny esetében!
 
 5. Indítsa a `SICOMTRACE.BAT`-ot!
-   Első argumentumként a SportIdent eszköz COM portját, másodikként a _nem Port class_ virtuális port nevét, harmadik argumentumként pedig a baudrátát kell megadni, ami 38400 vagy 4800 lehet és meg kell feleljen a SportIdent eszköz beállított értékének.
+   Első argumentumként a SportIdent eszköz COM portját, másodikként a baudrátát, harmadikként a virtuális port pár nevét (pl. `CNCB0`) kell megadni.
+   A baudráta értéke 38400 vagy 4800 lehet és meg kell feleljen a SportIdent eszköz beállított értékének.
    Lehetséges a TCP szerver portjának megadása is negyedik argumentumként.
-   Ennek hiányában a TCP szerver a 7487-es porton fog indulni.
+   Ennek hiányában a SICOMTRACE nem indít TCP/IP szervert.
 
    ![SICOMTRACE a Parancssorban](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd.png)
 
@@ -58,7 +59,7 @@ Telepítés és használat
 
    ![hub4com porthozzáférésének engedélyezése](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
-6. Most csatlakozhat a SportIdent eszközhöz a _Port class_ virtuális COM porton keresztül.
+6. Most csatlakozhat a SportIdent eszközhöz a virtuális COM porton keresztül.
    A kommunikáció úgy folytatható mint annak előtte, csupán a COM port változott.
 
    ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
