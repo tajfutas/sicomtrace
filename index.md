@@ -39,6 +39,8 @@ Telepítés és használat
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
+   További SportIdent hardverekhez újabb port párokat kell létrehozni.
+
 3. [Töltse le][LETÖLTÉS] és csomagolja ki a SICOMTRACE-et egy könyvtárba!
 
 4. Nyisson egy Parancssort (Start gomb > Keresés `cmd`-re)!
@@ -53,19 +55,30 @@ Telepítés és használat
    Lehetséges a TCP szerver portjának megadása is negyedik argumentumként.
    Ennek hiányában a SICOMTRACE nem indít TCP/IP szervert.
 
+   Amennyiben a fenti com0com beállítás él és COM10-en van a SportIdent doboz ami 38400-as baudrátára van állítva, akkor az alábbi paranccsal kötjük be a SICOMTRACE-et és nyitunk egy TCP/IP szervert a 7488-as porton:
+
+   ```bat
+   SICOMTRACE COM10 38400 CNCB0 7488
+   ```
+
    ![SICOMTRACE a Parancssorban](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd.png)
 
    Előfordulhat, hogy engedélyezni kell a hub4com porthozzáférését.
 
    ![hub4com porthozzáférésének engedélyezése](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
+   A példabeli SportIdent doboz most a COM8-on valamint a 7488-as porton is elérhető.
+   A kommunikáció mindkét esetben naplózásra kerül.
+
 6. Most csatlakozhat a SportIdent eszközhöz a virtuális COM porton keresztül.
    A kommunikáció úgy folytatható mint annak előtte, csupán a COM port változott.
 
    ![Config+ a virtuális COM porthoz kapcsolódva](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
 
+   Amennyiben nem látható a com0com virtuális COM portja, akkor a Nézet menüben állítsa be a _Mutass minden eszközt_ opciót!
+
    Ha a SportIdent hardver és a megadott baudráták nem egyeznek meg akkor ezen a ponton _Communication Failed_ hibaüzenetet kell kapjon.
-   Ennek orvoslására állítsa meg a SICOMTRACE-et kétszeri Ctrl+C leütésével, nyomja meg a felfelé mutató nyíl billentyűt (ez előkészíti az előző parancs szövegét a kurzor elé), írja át a baudrátát, majd üssön Entert!
+   Ennek orvoslására állítsa meg a SICOMTRACE-et kétszeri `Ctrl+C` leütésével, nyomja meg a felfelé mutató nyíl billentyűt (ez előkészíti az előző parancs szövegét a kurzor elé), írja át a baudrátát, majd üssön Entert!
    Ezt akkor is meg kell tenni, ha változik az eszköz baudrátája menet közben, ami mellesleg ritka dolog.
    Mindenesetre a leghelyesebb a SportIdent eszköz baudrátáját már korábban beálítani, a `SICOMTRACE.BAT`-nak azt az értéket megadni, és azt utána nem megváltoztatni.
 
