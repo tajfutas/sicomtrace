@@ -40,6 +40,8 @@ Installation and Usage
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
+   More SportIdent hardware requires additional port pairs.
+
 3. [Download][DOWNLOAD] and unpack SICOMTRACE to a directory you prefer.
 
 4. Open a Command Prompt (Start button > Search for `cmd`).
@@ -54,16 +56,27 @@ Installation and Usage
    The TCP server port can be explicitly set with the optional fourt argument.
    Without it, no TCP/IP server will be started.
 
+   If the aboe com0come setup lives and the SportIdent Station is commected on COM10 and is set to baudrate 38400 then the following command connects SICOMTRACE and opens a TCP/IP server on port 7488:
+
+   ```bat
+   SICOMTRACE COM10 38400 CNCB0 7488
+   ```
+
    ![Command Prompt session for SICOMTRACE](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd.png)
 
    You might have to allow access for hub4com.
 
    ![Allow access for hub4com](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
+   The SportIdent station in the example can be reached on COM8 and also on port 7488.
+   The communication will get logged in either case.
+
 6. Now you can connect to your SI station via the _Port class_ virtual COM port.
    Only the port changes but communication should work like it used to.
 
    ![Config+ connected to virtual COM port](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cpl2virt.png)
+
+   If you are unable to find the com0com virtual COM port in the list then set the _Show all available devices_ option in the View menu.
 
    If the SportIdent hardware have different baudrate setting than the given argument then here you should get a Communication Failed alert.
    To solve it, stop SICOMTRACE by hitting Ctrl+C twice, press the upward arrow key to get the last command before the cursor, edit the baudrate, and press the Enter key.
