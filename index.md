@@ -185,11 +185,11 @@ Ez utóbbi porthoz csatlakozik a versenyszervezői szoftver.
 2. Indítsuk a SPORTident Reader-t, és adjuk meg a SPORTident Live rendszerben létrehozott verseny hozzáférési adatait (API key, Event ID).
    Ezt követően válasszuk ki a SPORTident Serial port output plug-int mint kimenő oldali eszközt és kattintsunk a _Configure this plugin_ feliratra.
 
-   ![com0com Setup két port párra](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/siremain.png)
+   ![SI Reader Live beállítások](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/siremain.png)
 
-3. Állítsuk be az egyik COMx (a példában COM8) nevű virtuális com portot.
+3. Állítsuk be az egyik COMx (a példában COM8) nevű virtuális COM portot.
 
-   ![com0com Setup két port párra](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/sirecoms.png)
+   ![SI reader soros kimeneti eszköz beállítások](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/sirecoms.png)
 
    Ezzel a GSM dobozok úgy viselkednek, mint egy soros doboz, ami kizárólag autosend lyukasztások küldésére képes.
 
