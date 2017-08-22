@@ -17,7 +17,8 @@ Számos más ingyenes megoldást kipróbáltunk (Eltima Serial Port Monitor, Fre
 Ennek a megoldásnak a segítségével sikerült néhány verseny teljes RS232 adatsorait kinyerni ami alapját fogja képezni a későbbi fejlesztéseknek.
 Az adatsorok a [GitHub oldalunk](https://github.com/tajfutas) _data_ kezdetű adattárokban vannak.
 
-A rögzítéshez minden SportIdent eszközre jutnia kell egy SICOMTRACE-nek, majd ezt követően a naplófájlokat egy helyre kell gyűjteni a verseny eredményeivel és a lebonyolítást végző szoftver mentéseivel együtt.
+A rögzítéshez minden SportIdent eszközre jutnia kell egy SICOMTRACE-nek.
+A nap végén a naplófájlokat egy helyre kell gyűjteni a verseny eredményeivel és a lebonyolítást végző szoftver mentéseivel együtt.
 Érdemes legalább a verseny előtt és után menteni a szoftverben, de még jobb rendszeresen megtenni ezt különböző fájlokba és ezzel a verseny több állapotát rögzíteni.
 
 Kérem, hogy amennyiben végez ilyen rögzítést, azt ossza meg velem, hogy felkerülhessen ide és segítse az én és más fejlesztők munkáját!
@@ -26,7 +27,48 @@ Ez a sportág érdekét is szolgálja.
 Ezen felül a `SICOMTRACE.BAT` indít egy TCP/IP szervert is, amelynek segítségével hálózaton keresztüli kommunikáció is lehetséges a SportIdent eszközzel egy kliens számára.
 A további kliensek várakoztatva vannak.
 
-_Megjegyzés:_ A következő verzió nagyob szabadságot fog biztosítani a portok beállításban, így akár több virtuális soros port vagy több TCP/IP szerver is beállítható lesz.
+_Megjegyzés:_ A következő verzió nagyobb szabadságot fog biztosítani a portok beállításban, így akár több virtuális soros port vagy több TCP/IP szerver is beállítható lesz.
+
+
+Általános tudnivalók
+--------------------
+
+A telepítés és használat során virtuális soros port párokat kell majd létrehozni a com0com driver segíségével.
+Minden ilyen pár között egy virtuális [null modem] kábel is húzódik.
+Ez azt jelenti, hogy ami adat bemegy az egyik virtuális portba, az a másikon kimenő adatként jelentkezik és fordítva.
+Alapesetben ezek a virtuális portok a CNCAx és a CNCBx neveket kapják.
+Az ilyen portokat a legtöbb szoftver vagy nem is látja, vagy nem képes használni.
+Éppen ezért a com0com képes az ilyen virtuális portokat COM névvel és jellemzőkkel ellátni, amit követően semmilyen szoftver nem képes megkülönböztetni azokat számítógép fizikai COM portjaitól.
+Érdemes takarékosan bánni viszont a COM portok használatávl, egyes szoftverek ugyanis csak egy számjegyű (COM1–COM9) vagy csak az első 16 COM portot képesek kezelni, amelyek közül egy vagy több már jó eséllyel foglalt.
+Szélsőséges esetben az is megeshet, hogy erővel kell [felszabadítani a COM portokat][COM portok felszabadítása].
+
+Virtuális null modem kábelt hoz létre a hub4com program is, amit a SICOMTRACE használ a háttérben.
+Sőt, a hub4com működhet úgy, mint egy elosztó.
+Ilyen esetben be lehet állítani, hogy az egyes végpontokon bejövő adatokat melyik másik pont kapja meg.
+Ráadásul a hub4com végpontjai nem csupán virtuális vagy fizikai soros portok lehetnek (akár CNCxy nevű is), hanem hálózati portok is.
+A hub4com képes TCP/IP szervert indítani és megadott számú kliensekt fogadni, de képes kliensként kapcsolódni is.
+Ráadásul a hub4com ezenközben képes az adatforgalom megbízható naplózására is.
+
+A SICOMTRACE nem más, mint egy un. [kötegelt állomány], ami annyit tud, hogy megnyitja a hub4com programot a megfelelő – egyébként igen bonyolult – paraméterekkel.
+Ezek közé tartozik az is, hogy sosem engedi, hogy egy meglevő naplófájl felülíródjék.
+Az hub4com indítási parancsot a SICOMTRACE minden esetben ki is írja a képernyőre.
+
+Fontos tudni, hogy egy soros portot egyszerre csak egy szoftver ragadhat magához.
+Számos szoftver a kapcsolódott eszköz portját időközben el sem ereszti, csak a munka végeztével.
+A hub4com és így a SICOMTRACE is ilyen, azaz a működése teljes ideje alatt lefoglal minden soros végpontot.
+Ezzel szemben a létrehozott com0com virtuális portok mindig szabadok.
+
+Ha tehát adott egy SportIdent doboz a COM1 porton, akkor az adatforgalom naplózásához vagy hálózaton történő átadásához a SICOMTRACE által létrehozott virtuális null modem kábelen kell átvezetni azt.
+Ennek a virtuális kábelnek azonban kell egy másik végpont.
+
+Ha van egy com0com port párunk mondjuk COM2 és CNCB0 nevekkel, akkor a másik végpontnak CNCB0-t választva a doboz ugyanúgy elérhető a COM2 porton, mint annak előtte a COM1-en volt, viszont az adatforgalmat közben naplózásra is kerül.
+Az eredeti COM1 port foglalt, azon theát az eszköz nem érhető el, amíg a SICOMTRACE fut.
+
+Részletesebben leírva az történik, hogy a SICOMTRACE által indított hub4com összeköti COM1-et CNCB0-val, miközben lefoglalja magának ezeket a portokat.
+Ami bejön a COM1-en, az kimegy CNCB0-n és fordítva.
+CNCB0 viszont driver szinten át van vezetve a COM2-be (ez egy szabad port), azaz ami kijön CNCB0-n az bemegy a COM2-n és fordítva.
+Látható, hogy CNCB0 csak egy átmeneti állomás.
+COM2 port továbbra is szabadon használható bármilyen szoftver számára, hogy kapcsolódjon a SportIdent dobozhoz.
 
 
 Telepítés és használat
@@ -142,3 +184,6 @@ Ez a munka szabadon felhasználható mindennemű célból nem kizárólagosan id
 
 [LETÖLTÉS]: {{ page.download }}
 [com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
+[COM portok felszabadítása]: https://superuser.com/questions/408976/how-do-i-clean-up-com-ports-in-use
+[null modem]: https://pcforum.hu/szotar/Null+modem+k%C3%A1bel
+[kötegelt állomány]: https://hu.wikipedia.org/wiki/K%C3%B6tegelt_%C3%A1llom%C3%A1ny
