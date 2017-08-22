@@ -18,7 +18,7 @@ With this solution we managed to get the full RS232 data of some orienteering ev
 Those data are stored in the _data_ prefixed repositories in our [GitHub page](https://github.com/tajfutas).
 
 To record data, you should start a SICOMTRACE for every SportIdent hardware.
-Finally, the logfiles should be collected to a single directory along with the results of the event and the saved files of the organizer software.
+At the end of the event day, the logfiles should be collected to a single directory along with the results of the event and the saved files of the organizer software.
 It is advised to save in your software at least before and after the event but even better would be to save regularly to separate files and store multiple snapshots of the event.
 
 If you record event data this way, I ask you to share it with me to get shown here to help my and other developers' work.
@@ -28,6 +28,47 @@ In addition the `SICOMTRACE.BAT` starts a TCP server as well which allows commun
 Additional clients are defered.
 
 _Sidenote:_ The next version will provide more flexibility in adding virtual COM ports and TCP/IP servers, including the possibility of adding multiple of them.
+
+
+General Information
+-------------------
+
+During tha Installation and Usage phase below you will have to create virtual serial port pairs with the com0com driver.
+Between each of these pairs have a virtual [null modem] cable.
+This means that bytes going in one virtual port comes out from the other one and reversed.
+By default these virtual ports are named as CNCAx and CNCBx.
+These ports are invisible or unusable by most softwares.
+For this issue, com0com is capable to make any of these virtual ports to seem and behave like physical serial ports by allocating COMx type names to them, making softwares unable to distinguish such a port from a real one.
+It is adviced to be sparing with the COM ports though, as many softwares are capable to handle only one digit (COM1–COM9) or only the first 16 of them, and some of these ports are most likely already taken on your PC.
+In the extreme case, it may be necessary to [force clean up those ports][clean up COM ports].
+
+The hub4com software —called by SICOMTRACE— also creates a virtual null modem cable.
+Moreover, hub4com can work like a dispenser.
+In these case a setup can be made for the nodes controlling which other node the incoming bytes should be send.
+The nodes of hub4com can be virtual and physical serial ports (including those named as CNCxy) and also network ports.
+The hub4com is capable to start a TCP/IP server handling a fixed number of clients, but it also able to connect to a server as a client.
+In addition the hub4com can reliably log the communication.
+
+SICOMTRACE is nothing but a [batch file] which do only call hub4com with the necessary (rather complicated) parameters.
+Among these it does not allow any of the previous log files to get overwritten.
+The hub4com call string gets printed on the screen at each successful start.
+
+It is important to know that a serial port can be used by only one software at a single time.
+Most programs does not free up the connected device's port before the end of its process.
+The hub4com and thus SICOMTRACE are such programs, locking all serial nodes until exit.
+In contrast, com0com virtual ports are always made free.
+
+So if you have a SportIdent master station connected to COM1 then to log the communication or to pass it on the network, you have to transit the data over the virtual null modem cable made by SICOMTRACE.
+This cable needs another endpoint though.
+
+If you have a com0com port pair named as COM2 and CNCB0, then making CNCB0 as the other endpoint, the SportIdent station will be available on COM2 as before it was on COM1, but the communication can be logged as well.
+The original COM1 port is locked as long as SICOMTRACE runs making it impossible to conect to the station on that port.
+
+More specifically, hub4com (started by SICOMTRACE) connects COM1 with CNCB0 locking both of these ports.
+What comes in COM1 goes out in CNCB0 and reversed.
+However, CNCB0 is connected with a driver level null modem cable to COM2 (which is unlocked), so what goes out from CNCB0 comes in COM2 and reversed.
+Note that CNCB0 is a temporary node here.
+The COM2 port is free to get used by any software to conect to the SportIdent station.
 
 
 Installation and Usage
@@ -56,7 +97,7 @@ Installation and Usage
    The TCP server port can be explicitly set with the optional fourt argument.
    Without it, no TCP/IP server will be started.
 
-   If the aboe com0come setup lives and the SportIdent Station is commected on COM10 and is set to baudrate 38400 then the following command connects SICOMTRACE and opens a TCP/IP server on port 7488:
+   If the above com0come setup lives and the SportIdent Station is connected on COM10 and is set to baudrate 38400 then the following command connects SICOMTRACE and opens a TCP/IP server on port 7488:
 
    ```bat
    SICOMTRACE COM10 38400 CNCB0 7488
@@ -143,3 +184,6 @@ This work is free for any kind of usage, including but not limited to copy, modi
 
 [DOWNLOAD]: {{ page.download }}
 [com0com driver]: https://github.com/tajfutas/sicomtrace/releases/tag/com0com-signed
+[clean up COM ports]: https://superuser.com/questions/408976/how-do-i-clean-up-com-ports-in-use
+[null modem]: https://en.wikipedia.org/wiki/Null_modem
+[batch file]: https://en.wikipedia.org/wiki/Batch_file
