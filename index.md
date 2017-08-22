@@ -1,7 +1,7 @@
 ---
 layout: page
 title: SICOMTRACE
-subtitle: SportIdent COM Port Tracer and TCP server
+subtitle: SPORTident COM Port Tracer and TCP server
 version: 0.2.1
 repo: "https://github.com/tajfutas/sicomtrace"
 download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.1/sicomtrace.zip"
@@ -11,20 +11,20 @@ download: "https://github.com/tajfutas/sicomtrace/releases/download/v0.2.1/sicom
 Introduction
 ------------
 
-The `SICOMTRACE.BAT` batch file helps to log the SportIdent RS232 comminication in order to store and research data of orienteering events.
+The `SICOMTRACE.BAT` batch file helps to log the SPORTident RS232 comminication in order to store and research data of orienteering events.
 
 We tried other free solutions (Eltima Serial Port Monitor, Free Device Monitoring Studio, Portmon, AccessPort, SerialMon, API Monitor v2) for that and they all failed.
 With this solution we managed to get the full RS232 data of some orienteering events which will serve as the basis of our future development.
 Those data are stored in the _data_ prefixed repositories in our [GitHub page](https://github.com/tajfutas).
 
-To record data, you should start a SICOMTRACE for every SportIdent hardware.
+To record data, you should start a SICOMTRACE for every SPORTident hardware.
 At the end of the event day, the logfiles should be collected to a single directory along with the results of the event and the saved files of the organizer software.
 It is advised to save in your software at least before and after the event but even better would be to save regularly to separate files and store multiple snapshots of the event.
 
 If you record event data this way, I ask you to share it with me to get shown here to help my and other developers' work.
 This also serves the sake of the sport.
 
-In addition the `SICOMTRACE.BAT` starts a TCP server as well which allows communication with the SportIdent hardware over the network for a single client.
+In addition the `SICOMTRACE.BAT` starts a TCP server as well which allows communication with the SPORTident hardware over the network for a single client.
 Additional clients are defered.
 
 _Sidenote:_ The next version will provide more flexibility in adding virtual COM ports and TCP/IP servers, including the possibility of adding multiple of them.
@@ -54,21 +54,21 @@ Among these it does not allow any of the previous log files to get overwritten.
 The hub4com call string gets printed on the screen at each successful start.
 
 It is important to know that a serial port can be used by only one software at a single time.
-Most programs does not free up the connected device's port before the end of its process.
+Most programs does not free up the connected device's port before the end of their process.
 The hub4com and thus SICOMTRACE are such programs, locking all serial nodes until exit.
 In contrast, com0com virtual ports are always made free.
 
-So if you have a SportIdent master station connected to COM1 then to log the communication or to pass it on the network, you have to transit the data over the virtual null modem cable made by SICOMTRACE.
+So if you have a SPORTident master station connected to COM1 then to log the communication or to pass it on the network, you have to transit the data over the virtual null modem cable made by SICOMTRACE.
 This cable needs another endpoint though.
 
-If you have a com0com port pair named as COM2 and CNCB0, then making CNCB0 as the other endpoint, the SportIdent station will be available on COM2 as before it was on COM1, but the communication can be logged as well.
+If you have a com0com port pair named as COM2 and CNCB0, then making CNCB0 as the other endpoint, the SPORTident station will be available on COM2 as before it was on COM1, but the communication can be logged as well.
 The original COM1 port is locked as long as SICOMTRACE runs making it impossible to conect to the station on that port.
 
 More specifically, hub4com (started by SICOMTRACE) connects COM1 with CNCB0 locking both of these ports.
 What comes in COM1 goes out in CNCB0 and reversed.
 However, CNCB0 is connected with a driver level null modem cable to COM2 (which is unlocked), so what goes out from CNCB0 comes in COM2 and reversed.
 Note that CNCB0 is a temporary node here.
-The COM2 port is free to get used by any software to conect to the SportIdent station.
+The COM2 port is free to get used by any software to conect to the SPORTident station.
 
 
 Installation and Usage
@@ -76,12 +76,12 @@ Installation and Usage
 
 1. Download and install the [signed version of the com0com virtual null modem driver][com0com driver].
 
-2. Start the com0com setup program and ensure a virtual COM port pair for the SportIdent hardware.
+2. Start the com0com setup program and ensure a virtual COM port pair for the SPORTident hardware.
    Set any of the two ports to _use Port class_: this should change its name an behavior to mimic a real COM port.
 
    ![com0com Setup](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup.png)
 
-   More SportIdent hardware requires additional port pairs.
+   More SPORTident hardware requires additional port pairs.
 
 3. [Download][DOWNLOAD] and unpack SICOMTRACE to a directory you prefer.
 
@@ -92,12 +92,12 @@ Installation and Usage
    Otherwise, set the communication to 4800 baudrate which should be still fast enough for the majority of orienteering events.
 
 5. Start the `SICOMTRACE.BAT`.
-   Pass the SportIdent hardware COM port as the first, baudrate as the second, and the virtual com port pair name (eg. `CNCB0`) as the third argument.
-   Baudrate can be 38400 or 4800 and must match with the SportIdent hardware's own setting.
+   Pass the SPORTident hardware COM port as the first, baudrate as the second, and the virtual com port pair name (eg. `CNCB0`) as the third argument.
+   Baudrate can be 38400 or 4800 and must match with the SPORTident hardware's own setting.
    The TCP server port can be explicitly set with the optional fourt argument.
    Without it, no TCP/IP server will be started.
 
-   If the above com0come setup lives and the SportIdent Station is connected on COM10 and is set to baudrate 38400 then the following command connects SICOMTRACE and opens a TCP/IP server on port 7488:
+   If the above com0come setup lives and the SPORTident Station is connected on COM10 and is set to baudrate 38400 then the following command connects SICOMTRACE and opens a TCP/IP server on port 7488:
 
    ```bat
    SICOMTRACE COM10 38400 CNCB0 7488
@@ -109,7 +109,7 @@ Installation and Usage
 
    ![Allow access for hub4com](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/alert.png)
 
-   The SportIdent station in the example can be reached on COM8 and also on port 7488.
+   The SPORTident station in the example can be reached on COM8 and also on port 7488.
    The communication will get logged in either case.
 
 6. Now you can connect to your SI station via the _Port class_ virtual COM port.
@@ -119,10 +119,10 @@ Installation and Usage
 
    If you are unable to find the com0com virtual COM port in the list then set the _Show all available devices_ option in the View menu.
 
-   If the SportIdent hardware have different baudrate setting than the given argument then here you should get a Communication Failed alert.
+   If the SPORTident hardware have different baudrate setting than the given argument then here you should get a Communication Failed alert.
    To solve it, stop SICOMTRACE by hitting Ctrl+C twice, press the upward arrow key to get the last command before the cursor, edit the baudrate, and press the Enter key.
    This should be also done if the physical device's baudrate changes during the SICOMTRACE session which is a rare event.
-   By all means the best practice is to set the SportIdent hardware baudrate previously, pass that value to `SICOMTRACE.BAT` and avoid changing that thereafter.
+   By all means the best practice is to set the SPORTident hardware baudrate previously, pass that value to `SICOMTRACE.BAT` and avoid changing that thereafter.
 
    ![Communication Failed alert](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/commfail.png)
 
@@ -130,12 +130,12 @@ Installation and Usage
 
    ![RS232 communication log](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/tracelog.png)
 
-   Note that SportIdent Config+ shows baudrate 38400 instead of 4800.
+   Note that SPORTident Config+ shows baudrate 38400 instead of 4800.
    This is because the virtual port accepts the incoming data with 38400 baudrate without errors despite it is set to 4800.
-   It then passes the data to the SportIdent hardware with 4800 baudrate.
+   It then passes the data to the SPORTident hardware with 4800 baudrate.
    This is a limitation/feature of the com0com driver and hub4com and even _emulate baud rate_ option in step 2 can not help it.
    Hopefully you can set baudrate explicitely in your software.
-   Unfortunately, SportIdent Config+ tries to be smarter than that and prevents the manual setting of 4800 baudrate.
+   Unfortunately, SPORTident Config+ tries to be smarter than that and prevents the manual setting of 4800 baudrate.
    Instead the shown value get back to 38400 over and over despite the attempts to change it by hitting the F3 key.
    Still, I experienced no problem because of this limitation: the software communicated properly with a 4800 baud SI station.
 
@@ -169,7 +169,43 @@ Installation and Usage
 
    You can see that the BSM7 response was _02 F7 09 00 0C 11 07 0C 07 6A 88 23 40 E6 03_.
 
-   The SportIdent protocol is documented in the [SportIdent Developer Forum](https://www.sportident.com/support/developer-forum.html).
+   The SPORTident protocol is documented in the [SPORTident Developer Forum](https://www.sportident.com/support/developer-forum.html).
+
+
+Use Case: SPORTident Live (GSM radio controls)
+----------------------------------------------
+
+The SPORTident GSM stations autosend the punches to the SPORTident Live server from which they are retrieved with the SPORTident Reader program and they go to the organizer IT system with the help of com0com virtual serial port which is then logged and hooked to another COM port with SICOMTRACE.
+The organizer software can connect to this second COM port.
+
+1. We need two com0com port pairs.
+
+   ![com0com Setup for two port pairs](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/setup2.png)
+
+2. Start the SPORTident Reader and set up the event authorization (API key, Event ID) in the SPORTident Live system.
+   After that, choose the SPORTident Serial port output plug-in as output device and click on the _Configure this plugin_ title.
+
+   ![SI Reader Live settings](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/siremain.png)
+
+3. Set one of the COMx (COM8 in our example) named virtual serial port.
+
+   ![SI reader serial output settings](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/sirecoms.png)
+
+   Now the GSM controls behave like an autosend only RS232 station.
+
+4. We connect CNCB0 and CNCB1 with SICOMTRACE.
+   In our example, the command is the following:
+
+   ```bat
+   SICOMTRACE CNCB1 38400 CNCB0
+   ```
+
+   ![SICOMTRACE két port pár kötötti kötéskor](https://raw.githubusercontent.com/tajfutas/sicomtrace/gh-pages-shared/screenshots/cmd2.png)
+
+5. Start the SPORTident Reader by clicking on the _Open/Close_ title.
+
+6. The organizer software can get the radio punches via the COMy (COM9 in our example) port.
+   Connect it to this one.
 
 
 Licence
